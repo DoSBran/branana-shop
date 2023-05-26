@@ -10,19 +10,19 @@ export const OrderSumary = () => {
         <Grid item xs={6} display='flex' justifyContent='end'>
             <Typography>3 items</Typography>
         </Grid>
-        <Grid item xs={6} display='flex' justifyContent='end'>
+        <Grid item xs={6} display='flex'>
             <Typography variant='subtitle2'>SubTotal</Typography>
         </Grid>
         <Grid item xs={6} display='flex' justifyContent='end'>
             <Typography variant='subtitle2'>$155.33</Typography>
         </Grid>
-        <Grid item xs={6} display='flex' justifyContent='end'>
+        <Grid item xs={6} display='flex' >
             <Typography variant='subtitle2'>Impuestos</Typography>
         </Grid>
         <Grid item xs={6} display='flex' justifyContent='end'>
             <Typography variant='subtitle2'>$155.33</Typography>
         </Grid>
-        <Grid item xs={6} display='flex' justifyContent='end'>
+        <Grid item xs={6} display='flex' >
             <Typography variant='subtitle1'>Total:</Typography>
         </Grid>
         <Grid item xs={6} display='flex' justifyContent='end'>
