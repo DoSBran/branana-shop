@@ -9,7 +9,7 @@ export interface ProductInterface {
     tags: string[];
     title: string;
     type: TypesInterface;
-    gender: 'men'|'women'|'kid'|'unisex'
+    gender: 'men'|'women'|'kid'|'unisex';
 }
 
 export type SizesInterface = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
