@@ -2,25 +2,28 @@ import { ShopLayout } from "@/components/layouts";
 import { ProductList } from "@/components/products";
 import { FullScreenLoading } from "@/components/ui";
 import { useProducts } from "@/hooks";
-import { ProductInterface } from "@/interfaces";
 import { Typography } from "@mui/material";
+import React from "react";
 
-export default function Home() {
-  const { products, isLoading } = useProducts("/products");
+const women = () => {
+  const { products, isLoading } = useProducts("/products?gender=women");
 
+  console.log(products);
   return (
     <ShopLayout
-      title="Branna-shop"
-      pageDescription="Encuentra los mejores productos, al mejor precio"
+      title="Productos - mujer"
+      pageDescription="Encuentra los mejores productos, para mujer"
     >
       <Typography variant="h1" component="h1">
-        Tienda
+        Mujeres
       </Typography>
       <Typography variant="h2" sx={{ mb: 1 }}>
-        Todos los productos
+        Todos los productos para mujer
       </Typography>
 
       {isLoading ? <FullScreenLoading /> : <ProductList products={products} />}
     </ShopLayout>
   );
-}
+};
+
+export default women;
