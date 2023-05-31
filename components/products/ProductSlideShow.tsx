@@ -14,7 +14,7 @@ export const ProductSlideShow: FC<Props> = ({images}) => {
         indicators
     >
         {
-            images.map((image) => {
+            images?.map((image) => {
                 const url = `/products/${image}`;
                 return(
                     <div className={styles['each-slide']} key={image}>

@@ -4,19 +4,31 @@ import {
   Box,
   Button,
   IconButton,
+  Input,
   Link,
   Toolbar,
   Typography,
+  InputAdornment,
 } from "@mui/material";
 import NextLink from "next/link";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useRouter } from "next/router";
+import { UiContext } from "@/context";
+import { useContext, useState } from "react";
+import { ClearOutlined } from "@mui/icons-material";
 
 export const NavBar = () => {
+  const { asPath, replace } = useRouter();
+  const { toogleSideMenu } = useContext(UiContext);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState(false);
 
-  const {asPath} = useRouter();
-
+  const onSearch = () => {
+    if (searchTerm.trim().length === 0) return;
+    replace(`/search/${searchTerm}`);
+    setSearch(false);
+  };
   return (
     <AppBar>
       <Toolbar>
@@ -27,26 +39,63 @@ export const NavBar = () => {
           </Link>
         </NextLink>
         <Box flex={1} />
-        <Box sx={{display: {xs: 'none', sm: 'block'}}}>
+        <Box sx={{ display: search ? "none" : { xs: "none", sm: "block" } }}>
           <NextLink href="/category/men" passHref legacyBehavior>
             <Link>
-              <Button color={asPath === '/category/men'?'primary': 'info'}>Hombres</Button>
+              <Button color={asPath === "/category/men" ? "primary" : "info"}>
+                Hombres
+              </Button>
             </Link>
           </NextLink>
           <NextLink href="/category/women" passHref legacyBehavior>
             <Link>
-              <Button color={asPath === '/category/women'? 'primary': 'info'}>Mujeres</Button>
+              <Button color={asPath === "/category/women" ? "primary" : "info"}>
+                Mujeres
+              </Button>
             </Link>
           </NextLink>
           <NextLink href="/category/kid" passHref legacyBehavior>
             <Link>
-              <Button color={asPath === '/category/kid'? 'primary': 'info'}>Niños</Button>
+              <Button color={asPath === "/category/kid" ? "primary" : "info"}>
+                Niños
+              </Button>
             </Link>
           </NextLink>
         </Box>
         <Box flex={1} />
 
-        <IconButton>
+        <IconButton
+          onClick={() => setSearch(true)}
+          sx={{ display: !search ? { xs: "none", sm: "flex" } : "none" }}
+        >
+          <SearchOutlinedIcon />
+        </IconButton>
+
+        <Input
+          sx={{ display: search ? { xs: "none", sm: "flex" } : "none" }}
+          className="fadeIn"
+          autoFocus
+          onKeyPress={(e) => (e.key === "Enter" ? onSearch() : null)}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          type="text"
+          placeholder="Buscar..."
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setSearch(false)}
+              >
+                <ClearOutlined />
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+
+        <IconButton
+          onClick={() => toogleSideMenu()}
+          sx={{ display: { xs: "flex", sm: "none" } }}
+        >
           <SearchOutlinedIcon />
         </IconButton>
 
@@ -59,7 +108,7 @@ export const NavBar = () => {
             </IconButton>
           </Link>
         </NextLink>
-        <Button>Menu</Button>
+        <Button onClick={toogleSideMenu}>Menu</Button>
       </Toolbar>
     </AppBar>
   );
