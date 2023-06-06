@@ -10,3 +10,10 @@ export interface ProductCartInterface {
     gender: 'men'|'women'|'kid'|'unisex';
     quantity: number;
 }
+
+export interface CartSumary {
+    numberOfItems: number;
+    subTotal: number;
+    tax: number;
+    total: number;
+}

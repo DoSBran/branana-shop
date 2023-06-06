@@ -8,7 +8,6 @@ import React from "react";
 const women = () => {
   const { products, isLoading } = useProducts("/products?gender=women");
 
-  console.log(products);
   return (
     <ShopLayout
       title="Productos - mujer"

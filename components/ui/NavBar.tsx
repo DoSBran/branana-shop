@@ -14,7 +14,7 @@ import NextLink from "next/link";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useRouter } from "next/router";
-import { UiContext } from "@/context";
+import { CartContext, UiContext } from "@/context";
 import { useContext, useState } from "react";
 import { ClearOutlined } from "@mui/icons-material";
 
@@ -23,6 +23,7 @@ export const NavBar = () => {
   const { toogleSideMenu } = useContext(UiContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [search, setSearch] = useState(false);
+  const {numberOfItems} = useContext(CartContext);
 
   const onSearch = () => {
     if (searchTerm.trim().length === 0) return;
@@ -102,7 +103,7 @@ export const NavBar = () => {
         <NextLink href="/cart" passHref legacyBehavior>
           <Link>
             <IconButton>
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={numberOfItems > 9? '+9': numberOfItems} color="secondary">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>
